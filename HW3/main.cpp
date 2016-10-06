@@ -2,7 +2,7 @@
 //  main.cpp
 //  HW3
 //
-//  Created by Tyler Veeman on 9/29/16.
+//  Created by Tyler Veeman and team on 9/29/16.
 //  Copyright © 2016 TylerVeeman. All rights reserved.
 //
 
