@@ -2,8 +2,8 @@
 //  main.cpp
 //  HW3
 //
-//  Created by Tyler Veeman on 9/29/16.
-//  Copyright © 2016 TylerVeeman. All rights reserved.
+//  Created by Sydney Snyder on 9/29/16.
+//  Copyright © 2016 SydneySnyder. All rights reserved.
 //
 
 #include <stdio.h>
