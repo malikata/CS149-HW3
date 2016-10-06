@@ -1,11 +1,11 @@
 //
 //  main.cpp
 //  HW3
+//  *TEAM 5*
+//  Created by Tyler Veeman on 9/29/16.
+//  Copyright © 2016 TylerVeeman. All rights reserved.
 //
-//  Created by Tyler Veeman and team 5 on 9/29/16.
-//  Copyright © 2016 TylerVeeman and team 5 fam. All rights reserved.
-// Hello - K
-//Goodbye - A
+//
 
 #include <stdio.h>
 #include <pthread.h>
