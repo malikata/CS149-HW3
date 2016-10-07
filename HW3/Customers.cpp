@@ -26,7 +26,7 @@ std::queue <int> fillQueue(int n, std::queue <int> q)
     return q;
 }
 
-std::queue <int> getQueue(int n, int t)
+std::queue <int> getQueue(int n)
 {
     std::queue <int> result;
     result = fillQueue(n, result);

@@ -15,6 +15,6 @@
 #include <algorithm>
 #include <queue>
 
-std::queue <int> getQueue(int n, int t);
+std::queue <int> getQueue(int n);
 
 #endif /* Customers_hpp */
