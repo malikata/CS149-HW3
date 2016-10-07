@@ -5,6 +5,7 @@
 //  Created by Tyler Veeman on 10/4/16.
 //  Copyright © 2016 TylerVeeman. All rights reserved.
 //
+//
 
 #ifndef Customers_hpp
 #define Customers_hpp
@@ -15,6 +16,6 @@
 #include <algorithm>
 #include <queue>
 
-std::queue <int> getQueue(int n, int t);
+std::queue <int> getQueue(int n);
 
 #endif /* Customers_hpp */
