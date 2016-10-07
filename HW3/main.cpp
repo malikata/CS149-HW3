@@ -23,21 +23,7 @@ void * sell(void *seller_type)
 {
     int type;
     type = *(int *)seller_type;
-    std::queue <int> q = getQueue(qSize);
-    
-    srand(time(NULL));
-    if (type == 1)
-    {
-        int randNum = rand()%(2-1 + 1) + 1;
-    }
-    else if (type == 2)
-    {
-        int randNum = rand()%(4-2 + 1) + 2;
-    }
-    else if (type == 3)
-    {
-        int randNum = rand()%(7-4 + 1) + 4;
-    }
+    std::queue <long> q = getQueue(qSize, type);
     
     while (!q.empty())
     {

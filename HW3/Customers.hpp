@@ -15,7 +15,10 @@
 #include <time.h>
 #include <algorithm>
 #include <queue>
+#include <stdint.h>
+#include <iostream>
 
-std::queue <int> getQueue(int n);
+std::queue <long> getQueue(int n, int type);
+struct Customer;
 
 #endif /* Customers_hpp */
