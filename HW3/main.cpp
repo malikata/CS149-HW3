@@ -5,7 +5,7 @@
 //  Created by Tyler Veeman on 9/29/16.
 //  Copyright © 2016 TylerVeeman. All rights reserved.
 //
-//
+// Threaded Ticket Seller
 //
 
 #include <stdio.h>
