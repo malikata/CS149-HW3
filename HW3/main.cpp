@@ -10,6 +10,8 @@
 
 #include <stdio.h>
 #include <pthread.h>
+#include <string>
+#include <iostream>
 #include "Customers.hpp"
 #include "Seats.hpp"
 
@@ -24,11 +26,12 @@ void * sell(void *seller_type)
     int type;
     type = *(int *)seller_type;
     std::queue <long> q = getQueue(qSize, type);
+    int time = 0;
     
-    while (!q.empty())
+    while (!q.empty() && time < 60)
     {
         pthread_mutex_lock(&mutex);
-        pthread_cond_wait(&cond, &mutex);
+        time++;
         
         pthread_mutex_unlock(&mutex);
         // Serve any buyer available in this seller queue that is ready
@@ -51,7 +54,6 @@ int main()
     int Seller_type;
     // Create necessary data structures for the simulator.
     // Create buyers list for each seller ticket queue based on the // N value within an hour and have them in the seller queue.
-    
     // Create 10 threads representing the 10 sellers.
     Seller_type = 1;
     pthread_create(&tids[0], NULL, sell, &Seller_type);
