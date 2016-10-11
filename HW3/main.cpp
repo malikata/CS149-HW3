@@ -15,7 +15,7 @@
 #include "Customers.hpp"
 #include "Seats.hpp"
 
-int qSize = 15;
+int qSize;
 
 pthread_cond_t cond = PTHREAD_COND_INITIALIZER;
 pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
@@ -24,36 +24,43 @@ pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
 void * sell(void *seller_type)
 {
     int type;
-    type = *(int *)seller_type;
+    type = *(int*)seller_type;
     std::queue <long> q = getQueue(qSize, type);
     int time = 0;
     int waitTime = 0;
     bool notFull = true;
     
-    while (!q.empty() && time < 60 && notFull)
+    while (!q.empty() && time < 60)
     {
-        pthread_mutex_lock(&mutex);
-        
-        if (waitTime > 0)
+        if (notFull == false)
         {
-            waitTime--;
+            q.pop();
         }
         else
         {
-            Customer current = *(Customer*)q.front();
-            if (current.arrivalTime <= time)
+            while(waitTime > 0)
             {
-                q.pop();
-                notFull = sellNextSeat(type);
-                waitTime = current.serviceTime;
+                waitTime--;
+                time++;
+            }
+            
+            if (waitTime == 0 and time < 60)
+            {
+                pthread_mutex_lock(&mutex);
+                
+                Customer current = *(Customer*)q.front();
+                if (current.arrivalTime <= time)
+                {
+                    q.pop();
+                    notFull = sellNextSeat(type);
+                    waitTime = current.serviceTime;
+                }
+                
+                pthread_mutex_unlock(&mutex);
+                
+                time++;
             }
         }
-        
-        time++;
-        
-        pthread_mutex_unlock(&mutex);
-        // Serve any buyer available in this seller queue that is ready
-        // now to buy ticket till done with all relevant buyers in their queue ..................
     }
     return NULL; // thread exits
 }
@@ -71,6 +78,9 @@ int main()
     pthread_t tids[10];
     int Seller_type;
     
+    std::cout << "Enter amount of customers per queue: ";
+    std::cin >> qSize;
+    
     // Create 10 threads representing the 10 sellers.
     Seller_type = 1;
     pthread_create(&tids[0], NULL, sell, &Seller_type);
@@ -87,15 +97,14 @@ int main()
         pthread_create(&tids[i], NULL, sell, &Seller_type);
     }
     
-        // wakeup all seller threads
-        wakeup_all_seller_threads();
+    // wakeup all seller threads
+    wakeup_all_seller_threads();
     
-        // wait for all seller threads to exit
-        for (i = 0 ; i < 10 ; i++)
-        {
-            pthread_join(tids[i], NULL);
-        }
-        // Printout simulation results
-    //add code here
-        exit(0);
+    // wait for all seller threads to exit
+    for (i = 0 ; i < 10 ; i++)
+    {
+        pthread_join(tids[i], NULL);
+    }
+    
+    exit(0);
 }
