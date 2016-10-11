@@ -12,12 +12,6 @@
 int getRand();
 int getServiceTime(int type);
 
-struct Customer
-{
-    int arrivalTime;
-    int serviceTime;
-};
-
 std::queue <long> fillQueue(int n, std::queue <long> q, int type)
 {
     int temp[n];

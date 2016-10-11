@@ -12,4 +12,6 @@
 
 #include <stdio.h>
 
+bool sellNextSeat(int type);
+
 #endif /* Seats_hpp */

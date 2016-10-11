@@ -27,10 +27,28 @@ void * sell(void *seller_type)
     type = *(int *)seller_type;
     std::queue <long> q = getQueue(qSize, type);
     int time = 0;
+    int waitTime = 0;
+    bool notFull = true;
     
-    while (!q.empty() && time < 60)
+    while (!q.empty() && time < 60 && notFull)
     {
         pthread_mutex_lock(&mutex);
+        
+        if (waitTime > 0)
+        {
+            waitTime--;
+        }
+        else
+        {
+            Customer current = *(Customer*)q.front();
+            if (current.arrivalTime <= time)
+            {
+                q.pop();
+                notFull = sellNextSeat(type);
+                waitTime = current.serviceTime;
+            }
+        }
+        
         time++;
         
         pthread_mutex_unlock(&mutex);
@@ -52,8 +70,7 @@ int main()
     int i;
     pthread_t tids[10];
     int Seller_type;
-    // Create necessary data structures for the simulator.
-    // Create buyers list for each seller ticket queue based on the // N value within an hour and have them in the seller queue.
+    
     // Create 10 threads representing the 10 sellers.
     Seller_type = 1;
     pthread_create(&tids[0], NULL, sell, &Seller_type);

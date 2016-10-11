@@ -19,6 +19,10 @@
 #include <iostream>
 
 std::queue <long> getQueue(int n, int type);
-struct Customer;
+struct Customer
+{
+    int arrivalTime;
+    int serviceTime;
+};
 
 #endif /* Customers_hpp */
